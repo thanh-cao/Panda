@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="my-5 w-75 mx-auto">
+    <div class="container">
+
+        <p>Broken Dreams Boulevard 11</p>
+        <p>Company size:</p>
+        <p>Industry</p>
+
+    </div>
+
+    <hr>
+
+    <div class="profile-wrapper card bg-light mb-4">
+        <div class="card-header profile-header">
+            Approach & Entrances
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <p class="profile-title">Describe parking possibility at the company location.</p>
+                <p>{{ company.approach_entrance.parking }}</p>
+            </div>
+
+            <div class="mb-5">
+                <p class="profile-title">Describe the entrance to the company location.</p>
+                <p>{{ company.approach_entrance.entrances }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="profile-wrapper card bg-light mb-4">
+        <div class="card-header profile-header">
+            Facilities
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <p class="profile-title">Describe the toilets at the company location.</p>
+                <p>{{ company.facilities.toilets }}</p>
+            </div>
+
+            <div class="mb-5">
+                <p class="profile-title">Describe the office layout.</p>
+                <p>{{ company.facilities.office }}</p>
+            </div>
+
+            <div class="mb-5">
+                <p class="profile-title">Describe the social area.</p>
+                <p>{{ company.facilities.social_area }}</p>
+            </div>
+
+            <div class="mb-5">
+                <p class="profile-title">Special equipments</p>
+                <p>{{ company.facilities.special_equiments }}</p>
+            </div>
+
+            <div class="mb-5">
+                <p class="profile-title">Others</p>
+                <p>{{ company.facilities.others }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="profile-wrapper card bg-light mb-4">
+        <div class="card-header profile-header">
+            Assistive Technology
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <p class="profile-title">Assistive technologies available</p>
+                <ul>
+                    {{ company.assistive_tech.available_tech }}
+                </ul>
+            </div>
+
+            <div class="mb-5">
+                <p class="profile-title">Others</p>
+                <p>{{ company.assistive_tech.others }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-wrapper card bg-light mb-4">
+        <div class="card-header profile-header">
+            Working Flexibility
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <p class="profile-title">The flexibility of work</p>
+                <p>{{ company.working_flexibility }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-wrapper card bg-light mb-4">
+        <div class="card-header profile-header">
+            Human resource policies
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <p class="profile-title">Does the company have policies ensuring that the recruitment process is
+                    accessible to persons with different disabilities?</p>
+                <p>{{ company.hr_policies.hr_policies1 }}</p>
+            </div>
+            <div class="mb-5">
+                <p class="profile-title">Does the company have policies and resources which ensure the provision of
+                    reasonable accommodation, allowing people with disabilities to work in your organisation?</p>
+                <p>{{ company.hr_policies.hr_policies2 }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-wrapper card bg-light mb-4">
+        <div class="card-header profile-header">
+            An Inclusive Company Culture
+        </div>
+        <div class="card-body">
+            <div class="mb-5">
+                <p class="profile-title">Does the company have a supportive and inclusive workplace?</p>
+                <p>{{ company.inclusive_culture.inclusive_culture1 }}</p>
+            </div>
+            <div class="mb-5">
+                <p class="profile-title">Does the company have an anti-bullying policy in your workplace?</p>
+                <p>{{ company.inclusive_culture.inclusive_culture2 }}</p>
+            </div>
+            <div class="mb-5">
+                <p class="profile-title">Does the company promote an inclusive culture in your workplace through
+                    cultural awareness training for those who are culturally and linguistically diverse?</p>
+                <p>{{ company.inclusive_culture.inclusive_culture3 }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class=“profile-wrapper card bg-light mb-4”>
+        <div class=“card-header profile-header”>
+            Media
+        </div>
+        <div class=“card-body”>
+            <div class=“row”>
+                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
+                    <img src=“{{ company.media.company_banner_img.url }}”
+                        alt=“{{ company.media.company_banner_img.desc }}” class=“w-100 img rounded”>
+                </div>
+                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
+                    <img src=“{{ company.media.image1.url }}” alt=“{{ company.media.image1.desc }}” class=“w-100 img
+                        rounded”>
+                </div>
+                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
+                    <img src=“{{ company.media.image2.url }}” alt=“{{ company.media.image2.desc }}” class=“w-100 img
+                        rounded”>
+                </div>
+                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
+                    <img src=“{{ company.media.image3.url }}” alt=“{{ company.media.image3.desc }}” class=“w-100 img
+                        rounded”>
+                </div>
+                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
+                    <img src=“{{ company.media.image4.url }}” alt=“{{ company.media.image4.desc }}” class=“w-100 img
+                        rounded”>
+                </div>
+                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
+                    <img src=“{{ company.media.image5.url }}” alt=“{{ company.media.image5.desc }}” class=“w-100 img
+                        rounded”>
+                </div>
+            </div>
+        </div>
+</section>
+
+{% endblock %}

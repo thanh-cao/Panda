@@ -19,18 +19,6 @@
 
 <body>
     <header>
-        <!-- header taken with help from material bootstrap -->
-        <!-- <nav class="nav-extended recipedia-text nav-design">
-            <div class="nav-wrapper">
-                <a href="{{ url_for('home')}}" class="recipedia-logo brand-logo">Panda</a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('home')}}" class="menu-items recipedia-text">Home</a></li>
-                    <li><a href="{{ url_for('companies') }}" class="menu-items recipedia-text">Companies</a></li>
-                    <li><a href="{{ url_for('create_profile') }}" class="menu-items recipedia-text">Log In</a></li>
-                    </li>
-                </ul>
-            </div>
-        </nav> -->
         <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
@@ -70,6 +58,19 @@
             </div>
         </nav>
     </header>
+
+    <section>
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="row">
+          <h4 class="text-center">{{ message }}</h4>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </section>
 
     <!-- Main Content -->
     <main>

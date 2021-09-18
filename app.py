@@ -26,7 +26,7 @@ def home():
 
 @app.route('/companies')
 def companies():
-    companies = list(mongo.db.Users.find())
+    companies = list(mongo.db.users.find())
     return render_template("companies.html", companies=companies)
 
 
@@ -34,26 +34,31 @@ def companies():
 def signup():
     # Check if a username exists
     if request.method == "POST":
-        existing_user = mongo.db.Users.find_one(
+        existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
             flash("Username is already taken")
             return redirect(url_for('signup'))
 
+        if request.form.get("password") != request.form.get("confirmPassword"):
+            flash("Password doesn't match.")
+            return redirect(url_for('signup'))
+
         register = {
-            "username": request.form.get("username").lower(),
+            "username": request.form.get("username"),
             "email": request.form.get("email"),
             "password": generate_password_hash(request.form.get("password")),
-            "companyName": request.form.get("companyName"),
-            "companyAddress": request.form.get("companyAddress"),
-            "companyWebsite": request.form.get("companyWebsite")
+            "name": request.form.get("companyName"),
+            "address": request.form.get("companyAddress"),
+            "website": request.form.get("companyWebsite"),
+            "industry": request.form.get("companyIndustry"),
+            "size": request.form.get("companySize")
         }
-        mongo.db.Users.insert_one(register)
+        mongo.db.users.insert_one(register)
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
         return redirect(url_for("profile", username=session["user"]))
-
     return render_template("sign-up.html")
 
 
@@ -62,7 +67,7 @@ def create_profile():
     """
         create company profile when user is logged in.
     """
-    username = mongo.db.Users.find_one(
+    username = mongo.db.users.find_one(
         {'username': session['user']})['username']
     if request.method == 'POST':
         profile = {
@@ -129,7 +134,7 @@ def create_profile():
 def login():
     if request.method == "POST":
         # Check if a user exists
-        existing_user = mongo.db.Users.find_one(
+        existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
@@ -162,7 +167,7 @@ def logout():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    username = mongo.db.Users.find_one(
+    username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
         return render_template("profile.html", username=username)
@@ -172,10 +177,10 @@ def profile(username):
 
 @app.route('/companies/<company_name>')
 def company_profile(company_name):
-    company = mongo.db.Users.find_one(
+    company = mongo.db.users.find_one(
         {'companyName': company_name}
     )
-    return render_template('profile.html', company=company)
+    return render_template('company-profile.html', company=company)
 
 
 if __name__ == "__main__":

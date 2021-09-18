@@ -6,19 +6,23 @@
         <div class="card">
             <div class="card-header d-flex align-items-center">
                 <div class="d-inline">Sign up with <span class="text-primary">P.A.N.D.A.</span></div>
-                <div><img src="{{ url_for('static', filename='img/panda-project-logo.png') }}" alt="Panda Project logo" height="60" class="d-inline-block ms-3 align-text-top"></div>
+                <div><img src="{{ url_for('static', filename='img/panda-project-logo.png') }}" alt="Panda Project logo"
+                        height="60" class="d-inline-block ms-3 align-text-top"></div>
             </div>
             <div class="card-body">
+
                 <form action="{{ url_for('signup') }}" method="POST">
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Username" aria-label="First name" name="username" required>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="First name"
+                                name="username" required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Email Address *" aria-label="Email Address" name="email" required>
+                            <input type="text" class="form-control" placeholder="Email Address *"
+                                aria-label="Email Address" name="email" required>
                             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         <div class="col"></div>
@@ -26,40 +30,46 @@
 
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="password" class="form-control" placeholder="Password *" aria-label="Password" name="password" minlength="6" required>
+                            <input type="password" class="form-control" placeholder="Password *" aria-label="Password"
+                                name="password" minlength="6" required>
                             <div id="passwordHelpBlock" class="form-text">
                                 Your password must be at least 6 characters long.
                             </div>
                         </div>
                         <div class="col">
-                            <input type="password" class="form-control" placeholder="Repeat password *" aria-label="Repeat password" name="repeatPassword" minlength="6" required>
+                            <input type="password" class="form-control" placeholder="Confirm password *"
+                                aria-label="Repeat password" name="confirmPassword" minlength="6" required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Company name" aria-label="Company name" name="companyName">
+                            <input type="text" class="form-control" placeholder="Company name" aria-label="Company name"
+                                name="companyName" required>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Industry" aria-label="Industry" name="companyIndustry">
+                            <input type="text" class="form-control" placeholder="Industry" aria-label="Industry"
+                                name="companyIndustry">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Company Address" aria-label="Company Address" name="companyAddress">
+                            <input type="text" class="form-control" placeholder="Company Address"
+                                aria-label="Company Address" name="companyAddress">
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Company website" aria-label="Company website" name="companyWebsite">
+                            <input type="text" class="form-control" placeholder="Company website"
+                                aria-label="Company website" name="companyWebsite">
                         </div>
                     </div>
 
                     <select class="form-select" aria-label="Company size" name="companySize">
                         <option selected>Company size</option>
-                        <option value="small" aria-label="one to ten peole">1 - 10</option>
-                        <option value="medium" aria-label="eleven to fifty people">11-50</option>
-                        <option value="large" aria-label="one to ten peole">51 - 100</option>
-                        <option value="extraLarge" aria-label="one to ten peole">100+</option>
+                        <option value="1 - 10" aria-label="one to ten peole">1 - 10</option>
+                        <option value="11-50" aria-label="eleven to fifty people">11-50</option>
+                        <option value="51 - 100" aria-label="one to ten peole">51 - 100</option>
+                        <option value="100+" aria-label="one to ten peole">100+</option>
                     </select>
 
                     <button type="submit" class="btn btn-primary btn-lg mt-4">Submit</button>
