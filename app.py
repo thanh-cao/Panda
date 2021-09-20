@@ -25,8 +25,8 @@ def home():
 
 
 @app.route('/companies')
-def companies():
-    companies = list(mongo.db.users.find())
+def get_companies():
+    companies = list(mongo.db.companies.find())
     return render_template("companies.html", companies=companies)
 
 
