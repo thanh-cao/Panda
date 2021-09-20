@@ -59,9 +59,9 @@ def signup():
 
 @app.route('/createProfile', methods=['GET', 'POST'])
 def create_profile():
-    """""""""
+    '''
         create company profile when user is logged in.
-    """
+    '''
     user = mongo.db.users.find_one(
         {'username': session['user']})
     if request.method == 'POST':
@@ -206,49 +206,56 @@ def edit_profile(company_id):
     return render_template('edit-profile.html', company=company, user=user)
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route('/delete_profile/<company_id>')
+def delete_profile(company_id):
+    mongo.db.companies.remove({'_id': ObjectId(company_id)})
+    flash('Profile Successfully Deleted')
+    return redirect(url_for('get_companies'))
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
+    if request.method == 'POST':
         # Check if a user exists
         existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {'username': request.form.get('username').lower()})
 
         if existing_user:
             # check hashed password
             if check_password_hash(
                     existing_user['password'], request.form.get('password')):
-                session['user'] = request.form.get("username").lower()
-                flash("Welcome, {}".format(
-                    request.form.get("username")))
+                session['user'] = request.form.get('username').lower()
+                flash('Welcome, {}'.format(
+                    request.form.get('username')))
                 return redirect(
-                    url_for("profile", username=session["user"]))
+                    url_for('profile', username=session['user']))
             else:
                 # if password doesn't match
-                flash("Incorrect Username and/or Password, Please try again")
-                return redirect(url_for("home"))
+                flash('Incorrect Username and/or Password, Please try again')
+                return redirect(url_for('home'))
         else:
             # username does not exist
-            flash("Incorrect Username and/or Password, Please try again")
-            return redirect(url_for("home"))
+            flash('Incorrect Username and/or Password, Please try again')
+            return redirect(url_for('home'))
 
-    return render_template("login.html")
+    return render_template('login.html')
 
 
-@app.route("/logout")
+@app.route('/logout')
 def logout():
-    flash("You have been logged out.")
-    session.pop("user")
-    return redirect(url_for("login"))
+    flash('You have been logged out.')
+    session.pop('user')
+    return redirect(url_for('login'))
 
 
-@app.route("/profile/<username>")
+@app.route('/profile/<username>')
 def profile(username):
     username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
-        return render_template("profile.html", username=username)
+        {'username': session['user']})['username']
+    if session['user']:
+        return render_template('profile.html', username=username)
 
-    return redirect(url_for("login"))
+    return redirect(url_for('login'))
 
 
 @app.route('/companies/<company_id>')
@@ -259,7 +266,7 @@ def company_profile(company_id):
     return render_template('company-profile.html', company=company)
 
 
-if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"),
-            port=int(os.environ.get("PORT")),
+if __name__ == '__main__':
+    app.run(host=os.environ.get('IP'),
+            port=int(os.environ.get('PORT')),
             debug=True)

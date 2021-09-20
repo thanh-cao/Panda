@@ -15,6 +15,7 @@
                 <p class="industry">Industry: {{ company.company_info.company_industry }}</p>
                 {% if session.user|lower == company.created_by|lower %}
                 <a href="{{ url_for('edit_profile', company_id=company._id) }}" class="btn btn-sm btn-primary">Edit profile</a>
+                <a href="{{ url_for('delete_profile', company_id=company._id) }}" class="btn btn-sm btn-danger">Delete</a>
                 {% endif %}
             </div>
         </div>
