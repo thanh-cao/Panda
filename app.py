@@ -30,6 +30,13 @@ def get_companies():
     return render_template('companies.html', companies=companies)
 
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    query = request.form.get('query')
+    companies = list(mongo.db.companies.find({'$text': {'$search': query}}))
+    return render_template('companies.html', companies=companies)
+
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     # Check if a username exists

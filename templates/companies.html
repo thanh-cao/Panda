@@ -3,17 +3,18 @@
 
 <section>
     <div class="container text-center d-flex flex-column justify-content-center align-items-stretch px-4 pt-4 h-100">
-        <form class="d-flex pb-1" id="search-companies">
-            <input class="form-control me-2" type="search" placeholder="Type a company, industry, region"
-                aria-label="Search">
+        <form class="d-flex pb-1" id="search-companies" action=" {{ url_for('search') }}" method="POST">
+            <input class="form-control me-2" type="text" placeholder="Type a company, industry, region"
+                aria-label="Search" name="query">
             <button class="btn btn-outline-primary" type="submit">Search</button>
+            <a href="{{ url_for('get_companies') }}" class="btn btn-outline-secondary ms-1">Reset</a>
         </form>
-        <p class="search-results px-2 mb-0 text-start"><span id="num-results">10</span> results found</p>
     </div>
 </section>
 
+{% if companies|length > 0 %}
 {% for company in companies %}
-<section class="company-list mt-3">
+<section class="company-list mt-3 container">
     <hr>
     <div class="row mx-2 px-md-3 d-flex align-items-center company-item-wrapper">
         <a href="{{ url_for('company_profile', company_id=company._id) }}" class="col-9">
@@ -30,7 +31,7 @@
                     <p class="company-size">Size: {{ company.company_info.company_size }}</p>
                     <p class="industry">Industry: {{ company.company_info.company_industry }}</p>
                 </div>
-            </div>   
+            </div>
         </a>
         {% if session.user|lower == company.created_by|lower %}
         <div class="col-3">
@@ -39,9 +40,14 @@
         </div>
         {% endif %}
     </div>
-    <hr>
 
     {% endfor %}
+    {% else %}
+    <div class="container">
+        <h3 class="row">No results found</h3>
+    </div>
+
+    {% endif %}
 </section>
 
 {% endblock %}
