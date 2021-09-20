@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container my-5 w-75">
+    <div class="row mb-3">
+        <h1>Edit company profile</h1>
+        <p>Please provide as detailed as possible the facilities and possibilities at your company in bullet point. The
+            more information the better for your potential employees to better prepare themselves for the better days
+            with your company.</p>
+        <p class="text-muted">Company profile created by <span class="text-primary">{{ user.username }}</span></p>
+    </div>
+
+    <div class="profile-creation-form card bg-light p-3">
+        <form id="profileCreationForm" action="{{ url_for('edit_profile', company_id=company._id) }}" method="POST">
+
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab">
+                <h2>Company Information</h2>
+
+                <div class="row mb-3 mt-5">
+                    <div class="col">
+                        <input type="text" class="form-control" value="{{ company.company_info.company_name }}"
+                            aria-label="Company name" name="companyName" required>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" value="{{ company.company_info.company_industry }}"
+                            aria-label="Industry" name="companyIndustry">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <input type="text" class="form-control" value="{{ company.company_info.company_address }}"
+                            aria-label="Company Address" name="companyAddress">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" value="{{ company.company_info.company_website }}"
+                            aria-label="Company website" name="companyWebsite">
+                    </div>
+                </div>
+
+                <select class="form-select" aria-label="Company size" name="companySize">
+                    <option disabled>Company size</option>
+                    <option value="1 - 10" aria-label="one to ten peole">1 - 10</option>
+                    <option value="11-50" aria-label="eleven to fifty people">11-50</option>
+                    <option value="51 - 100" aria-label="one to ten peole">51 - 100</option>
+                    <option value="100+" aria-label="one to ten peole">100+</option>
+                </select>
+            </div>
+
+            <div class="tab">
+                <h2>Approach & Entrances</h2>
+                <div>
+                    <p>Describe in bullet points parking possibility at the company location. Is there a parking slot
+                        available for people with disabilities? If yes, how many?</p>
+                    <textarea class="form-control" name="parking" aria-label="describe parking at the company location"
+                        rows="5">
+                       {{- company.approach_entrance.parking -}}
+                    </textarea>
+                </div>
+                <div class="mt-4">
+                    <p>Describe in bullet points the entrance to the company location. Things to consider:
+                        <ul>
+                            <li>Width of entrance and hallway</li>
+                            <li>Is there ramp access?</li>
+                            <li>Type of door? Glass door or not see-through? Automatic doors?</li>
+                            <li>Reception area?</li>
+                        </ul>
+                    </p>
+                    <textarea class="form-control" name="entrances"
+                        aria-label="describe entrances at the company location" rows="5">
+                        {{- company.approach_entrance.entrances -}}
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="tab">
+                <h2>Facilities</h2>
+
+                <div>
+                    <p>Describe in bullet points how the toilets are like. Doorway to toilet? Grab rails? Unisex?</p>
+                    <textarea class="form-control" name="toilets" aria-label="describe toilets at the company location"
+                        rows="5">
+                        {{- company.facilities.toilets -}}
+                    </textarea>
+                </div>
+
+                <div class="mt-4">
+                    <p>Describe in bullet points the how the office is like.
+                        <ul>
+                            <li>Is it in a shared co-working space or company has own floor? etc</li>
+                            <li>Which floor is the office? Is there elevator?</li>
+                            <li>Do employees sit in cubicles or open layout?</li>
+                            <li>Do employees sit in teams? How big are the teams?</li>
+                        </ul>
+                    </p>
+                    <textarea class="form-control" name="office" aria-label="describe company office" rows="5">
+                        {{- company.facilities.office -}}
+                    </textarea>
+                </div>
+
+                <div class="mt-4">
+                    <p>Describe in bullet points the social area. Is there a canteen for example.</p>
+                    <textarea class="form-control" name="socialArea"
+                        aria-label="describe social area at the company location" rows="5">
+                        {{- company.facilities.social_area -}}
+                    </textarea>
+                </div>
+
+                <div class="mt-4">
+                    <p>Are there any special equiments? For example: height adjustable desks and chairs</p>
+                    <textarea class="form-control" name="specialEquipments" aria-label="special equipments" rows="5">
+                        {{- company.facilities.special_equipments -}}
+                    </textarea>
+                </div>
+                <div class="mt-4">
+                    <p>Others...</p>
+                    <textarea class="form-control" name="facilitiesOthers" aria-label="other details" rows="5">
+                        {{- company.facilities.others -}}
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="tab">
+                <h2>Assistive Technology</h2>
+
+                <p>Does your company have any of the following assistive technologies? </p>
+                <input type="checkbox" id="assist1" name="assist" value="Screen reading software">
+                <label for="assist1">Screen reading software</label><br>
+                <input type="checkbox" id="assist2" name="assist" value="Captioning available at meetings">
+                <label for="assist2">Captioning available at meetings</label><br>
+                <input type="checkbox" id="assist3" name="assist" value="Sign language interpretation">
+                <label for="assist3">Sign language interpretation</label><br>
+                <input type="checkbox" id="assist4" name="assist" value="Documents available in Braille">
+                <label for="assist4">Documents available in Braille</label><br>
+                <input type="checkbox" id="assist5" name="assist" value="Visual fire alarm">
+                <label for="assist5">Visual fire alarm</label><br>
+                <input type="checkbox" id="assist6" name="assist"
+                    value="Portable induction loop for those with hearing aids">
+                <label for="assist6">Portable induction loop for those with hearing aids</label><br>
+
+                <div class="mt-4">
+                    <p>Others...</p>
+                    <textarea class="form-control" name="technologyOthers"
+                        aria-label="other details for assistive technology" rows="5">
+                        {{- company.assistive_tech.others -}}
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="tab">
+                <h2>Working Flexibility</h2>
+
+                <div class="mt-4">
+                    <p>The flexibility of working: flexible hours? Remote work possible? How can meetings be conduced?
+                        Quiet room for working</p>
+                    <textarea class="form-control" name="workingFlexibility" aria-label="Working Flexibility" rows="5">
+                        {{- company.working_flexibility -}}
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="tab">
+                <h2>Human resource policies</h2>
+
+                <div class="mt-4">
+                    <p>Do you have policies ensuring that the recruitment process is accessible to persons with
+                        different disabilities?</p>
+                    <textarea class="form-control" name="hrPolicies1"
+                        aria-label="policies ensuring that the recruitment process is accessible to persons with different disabilities"
+                        rows="5">
+                        {{- company.hr_policies.hr_policies1 -}}
+                    </textarea>
+                </div>
+                <div class="mt-4">
+                    <p>Do you have policies and resources which ensure the provision of reasonable accommodation,
+                        allowing people with disabilities to work in your organisation?</p>
+                    <textarea class="form-control" name="hrPolicies2"
+                        aria-label="policies and resources which ensure the provision of reasonable accommodation, allowing people with disabilities to work in your organisation"
+                        rows="5">
+                        {{- company.hr_policies.hr_policies2 -}}
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="tab">
+                <h2>An Inclusive Company Culture</h2>
+
+                <div class="mt-4">
+                    <p>Do you have a supportive and inclusive workplace?</p>
+                    <textarea class="form-control" name="companyCulture1"
+                        aria-label="a supportive and inclusive workplace" rows="5">
+                        {{- company.inclusive_culture.inclusive_culture1 -}}
+                    </textarea>
+                </div>
+                <div class="mt-4">
+                    <p>Do you have an anti-bullying policy in your workplace?</p>
+                    <textarea class="form-control" name="companyCulture2"
+                        aria-label="an anti-bullying policy in your workplace" rows="5">
+                        {{- company.inclusive_culture.inclusive_culture2 -}}
+                    </textarea>
+                </div>
+                <div class="mt-4">
+                    <p>Do you promote an inclusive culture in your workplace through cultural awareness training for
+                        those who are culturally and linguistically diverse?</p>
+                    <textarea class="form-control" name="companyCulture3"
+                        aria-label="promote an inclusive culture in your workplace through cultural awareness training"
+                        rows="5">
+                        {{- company.inclusive_culture.inclusive_culture3 -}}
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="tab">
+                <h2>Media</h2>
+
+                <div class="mt-4">
+                    <p>Provide a link to your company's logo:</p>
+                    <input type="text" class="form-control" name="companyLogo" value="{{ company.media.companyLogo }}" aria-label="upload company's logo">
+                </div>
+                <div class="mt-4">
+                    <p>Provide an image link as a banner on your company's profile page:</p>
+                    <input type="text" class="form-control" name="companyBannerImg"
+                        aria-label="upload company's banner image" value="{{ company.media.company_banner_img.url }}">
+                    <input type="text" class="form-control" name="companyBannerDesc"
+                        aria-label="write description of company's banner image"
+                        placeholder="A short description of the image" maxlength="100" value="{{ company.media.company_banner_img.desc }}">
+                </div>
+                <div class="mt-4">
+                    <p>Provide an image link to showcase your company:</p>
+                    <input type="text" class="form-control" name="companyImg1" value="{{ company.media.image1.url }}" aria-label="upload company's image">
+                    <input type="text" class="form-control" name="companyImg1Desc"
+                        aria-label="write description of company's banner image"
+                        placeholder="A short description of the image" maxlength="100" value="{{ company.media.image1.desc }}">
+                </div>
+                <div class="mt-4">
+                    <p>Provide an image link to showcase your company:</p>
+                    <input type="text" class="form-control" name="companyImg2" aria-label="upload company's image" value="{{ company.media.image2.url }}">
+                    <input type="text" class="form-control" name="companyImg2Desc"
+                        aria-label="write description of company's banner image"
+                        placeholder="A short description of the image" maxlength="100" value="{{ company.media.image2.desc }}">
+                </div>
+                <div class="mt-4">
+                    <p>Provide an image link to showcase your company:</p>
+                    <input type="text" class="form-control" name="companyImg3" aria-label="upload company's image" value="{{ company.media.image3.url }}">
+                    <input type="text" class="form-control" name="companyImg3Desc"
+                        aria-label="write description of company's banner image"
+                        placeholder="A short description of the image" maxlength="100" value="{{ company.media.image3.desc }}">
+                </div>
+                <div class="mt-4">
+                    <p>Provide an image link to showcase your company:</p>
+                    <input type="text" class="form-control" name="companyImg4" aria-label="upload company's image" value="{{ company.media.image4.url }}">
+                    <input type="text" class="form-control" name="companyImg4Desc"
+                        aria-label="write description of company's banner image"
+                        placeholder="A short description of the image" maxlength="100" value="{{ company.media.image4.desc }}">
+                </div>
+                <div class="mt-4">
+                    <p>Provide an image link to showcase your company:</p>
+                    <input type="text" class="form-control" name="companyImg5" aria-label="upload company's image" value="{{ company.media.image5.url }}">
+                    <input type="text" class="form-control" name="companyImg5Desc"
+                        aria-label="write description of company's banner image"
+                        placeholder="A short description of the image" maxlength="100" value="{{ company.media.image5.desc }}">
+                </div>
+            </div>
+
+            <div class="mt-3 overflow-auto">
+                <button type="button" class="btn btn-secondary float-start" id="prevBtn"
+                    onclick="nextPrev(-1)">Previous</button>
+                <button type="button" class="btn btn-primary float-end" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+
+            <!-- Circles which indicates the steps of the form: -->
+            <div class="text-center mt-5">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

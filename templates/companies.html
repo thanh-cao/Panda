@@ -15,23 +15,30 @@
 {% for company in companies %}
 <section class="company-list mt-3">
     <hr>
-    <a href="{{ url_for('company_profile', company_id=company._id) }}">
-        <div class="row mx-2 px-md-3 d-flex align-items-center">
-            <div class="col-3">
-                <img src="{{ company.media.companyLogo }}" class="img-thumbnail rounded" width="200" height="200"
-                    alt="{{ company.companyName }} logo">
-                <!-- </a> -->
-            </div>
-            <div class="col-9">
-                <!-- <a href="{{ url_for('company_profile', company_id=company._id) }}"> -->
-                <p class="company-name">{{ company.company_info.company_name }}</p>
-                <p class="company-address">Address: {{ company.company_info.company_address }}</p>
-                <p class="company-size">Size: {{ company.company_info.company_size }}</p>
-                <p class="industry">Industry: {{ company.company_info.company_industry }}</p>
-            </div>
-
+    <div class="row mx-2 px-md-3 d-flex align-items-center company-item-wrapper">
+        <a href="{{ url_for('company_profile', company_id=company._id) }}" class="col-9">
+            <div class="row">
+                <div class="col-4">
+                    <img src="{{ company.media.companyLogo }}" class="img-thumbnail rounded" width="200" height="200"
+                        alt="{{ company.companyName }} logo">
+                    <!-- </a> -->
+                </div>
+                <div class="col-8">
+                    <!-- <a href="{{ url_for('company_profile', company_id=company._id) }}"> -->
+                    <p class="company-name">{{ company.company_info.company_name }}</p>
+                    <p class="company-address">Address: {{ company.company_info.company_address }}</p>
+                    <p class="company-size">Size: {{ company.company_info.company_size }}</p>
+                    <p class="industry">Industry: {{ company.company_info.company_industry }}</p>
+                </div>
+            </div>   
+        </a>
+        {% if session.user|lower == company.created_by|lower %}
+        <div class="col-3">
+            <a href="{{ url_for('edit_profile', company_id=company._id) }}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="#" class="btn btn-sm btn-danger">Delete</a>
         </div>
-    </a>
+        {% endif %}
+    </div>
     <hr>
 
     {% endfor %}

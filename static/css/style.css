@@ -83,11 +83,11 @@ form #profileCreationForm {
 }
 
 /*  company listing page  */
-.company-list > a {
+.company-list a.col-9 {
   text-decoration: none;
   color: inherit;
 }
 
-.company-list > a > .row:hover {
+.company-item-wrapper:hover {
   border: 2px solid var(--bs-primary);
 }

@@ -90,16 +90,16 @@ def create_profile():
             },
             'working_flexibility': request.form.get('workingFlexibility'),
             'hr_policies': {
-                'hr_policies1':  request.form.get('hrPolicies1'),
-                'hr_policies2':  request.form.get('hrPolicies2'),
+                'hr_policies1': request.form.get('hrPolicies1'),
+                'hr_policies2': request.form.get('hrPolicies2'),
             },
             'inclusive_culture': {
-                'inclusive_culture1':  request.form.get('companyCulture1'),
-                'inclusive_culture2':  request.form.get('companyCulture2'),
-                'inclusive_culture3':  request.form.get('companyCulture1'),
+                'inclusive_culture1': request.form.get('companyCulture1'),
+                'inclusive_culture2': request.form.get('companyCulture2'),
+                'inclusive_culture3': request.form.get('companyCulture1'),
             },
             'media': {
-                'companyLogo':  request.form.get('companyLogo'),
+                'companyLogo': request.form.get('companyLogo'),
                 'company_banner_img': {
                     'url': request.form.get('companyBannerImg'),
                     'desc': request.form.get('companyBannerDesc'),
@@ -131,6 +131,79 @@ def create_profile():
         flash('Profule successfully created')
         return redirect(url_for('profile', username=session['user']))
     return render_template('create-profile.html', user=user)
+
+
+@app.route('/edit_profile/<company_id>', methods=['GET', 'POST'])
+def edit_profile(company_id):
+    if request.method == 'POST':
+        submit = {
+            'company_info': {
+                'company_name': request.form.get('companyName'),
+                'company_address': request.form.get('companyAddress'),
+                'company_website': request.form.get('companyWebsite'),
+                'company_industry': request.form.get('companyIndustry'),
+                'company_size': request.form.get('companySize')
+            },
+            'approach_entrance': {
+                'parking': request.form.get('parking'),
+                'entrances': request.form.get('entrances')
+            },
+            'facilities': {
+                'toilets': request.form.get('toilets'),
+                'office': request.form.get('office'),
+                'social_area': request.form.get('socialArea'),
+                'special_equipments': request.form.get('specialEquipments'),
+                'others': request.form.get('facilitiesOthers')
+            },
+            'assistive_tech': {
+                'available_tech': request.form.getlist('assist'),
+                'others': request.form.get('technologyOthers')
+            },
+            'working_flexibility': request.form.get('workingFlexibility'),
+            'hr_policies': {
+                'hr_policies1': request.form.get('hrPolicies1'),
+                'hr_policies2': request.form.get('hrPolicies2'),
+            },
+            'inclusive_culture': {
+                'inclusive_culture1': request.form.get('companyCulture1'),
+                'inclusive_culture2': request.form.get('companyCulture2'),
+                'inclusive_culture3': request.form.get('companyCulture3'),
+            },
+            'media': {
+                'companyLogo': request.form.get('companyLogo'),
+                'company_banner_img': {
+                    'url': request.form.get('companyBannerImg'),
+                    'desc': request.form.get('companyBannerDesc'),
+                },
+                'image1': {
+                    'url': request.form.get('companyImg1'),
+                    'desc': request.form.get('companyImg1Desc')
+                },
+                'image2': {
+                    'url': request.form.get('companyImg2'),
+                    'desc': request.form.get('companyImg2Desc')
+                },
+                'image3': {
+                    'url': request.form.get('companyImg3'),
+                    'desc': request.form.get('companyImg3Desc')
+                },
+                'image4': {
+                    'url': request.form.get('companyImg4'),
+                    'desc': request.form.get('companyImg4Desc')
+                },
+                'image5': {
+                    'url': request.form.get('companyImg5'),
+                    'desc': request.form.get('companyImg5Desc')
+                },
+            },
+            'created_by': session['user']
+        }
+        mongo.db.companies.update({'_id': ObjectId(company_id)}, submit)
+        flash('Profile successfully updated')
+        return redirect(url_for('company_profile', company_id=company_id))
+    user = mongo.db.users.find_one({'username': session['user']})
+    company = mongo.db.companies.find_one({'_id': ObjectId(company_id)})
+    return render_template('edit-profile.html', company=company, user=user)
 
 
 @app.route("/login", methods=["GET", "POST"])
