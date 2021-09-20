@@ -78,7 +78,9 @@
             <div class="mb-5">
                 <p class="profile-title">Assistive technologies available</p>
                 <ul>
-                    {{ company.assistive_tech.available_tech }}
+                    {% for tech in company.assistive_tech.available_tech %}
+                    <li>{{ tech }}</li>
+                    {% endfor %}
                 </ul>
             </div>
 

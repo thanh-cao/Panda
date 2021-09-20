@@ -14,18 +14,17 @@
                 <form action="{{ url_for('signup') }}" method="POST">
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Username" aria-label="First name"
-                                name="username" required>
-                        </div>
-                    </div>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="User name"
+                                name="username" minlength="4" maxlength="15" pattern="[a-zA-Z0-9]+" required>
+                            <div class="form-text">Username should be between 4 to 15 characters long. No special characters allowed.</div>
 
-                    <div class="row mb-3">
+                        </div>
                         <div class="col">
                             <input type="text" class="form-control" placeholder="Email Address *"
                                 aria-label="Email Address" name="email" required>
                             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
-                        <div class="col"></div>
+
                     </div>
 
                     <div class="row mb-3">
@@ -41,36 +40,6 @@
                                 aria-label="Repeat password" name="confirmPassword" minlength="6" required>
                         </div>
                     </div>
-
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Company name" aria-label="Company name"
-                                name="companyName" required>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Industry" aria-label="Industry"
-                                name="companyIndustry">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Company Address"
-                                aria-label="Company Address" name="companyAddress">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Company website"
-                                aria-label="Company website" name="companyWebsite">
-                        </div>
-                    </div>
-
-                    <select class="form-select" aria-label="Company size" name="companySize">
-                        <option selected>Company size</option>
-                        <option value="1 - 10" aria-label="one to ten peole">1 - 10</option>
-                        <option value="11-50" aria-label="eleven to fifty people">11-50</option>
-                        <option value="51 - 100" aria-label="one to ten peole">51 - 100</option>
-                        <option value="100+" aria-label="one to ten peole">100+</option>
-                    </select>
 
                     <button type="submit" class="btn btn-primary btn-lg mt-4">Submit</button>
                 </form>
