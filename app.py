@@ -49,11 +49,11 @@ def signup():
             "username": request.form.get("username"),
             "email": request.form.get("email"),
             "password": generate_password_hash(request.form.get("password")),
-            "name": request.form.get("companyName"),
-            "address": request.form.get("companyAddress"),
-            "website": request.form.get("companyWebsite"),
-            "industry": request.form.get("companyIndustry"),
-            "size": request.form.get("companySize")
+            "company_name": request.form.get("companyName"),
+            "company_address": request.form.get("companyAddress"),
+            "company_website": request.form.get("companyWebsite"),
+            "company_industry": request.form.get("companyIndustry"),
+            "company_size": request.form.get("companySize")
         }
         mongo.db.users.insert_one(register)
         session["user"] = request.form.get("username").lower()
@@ -67,10 +67,17 @@ def create_profile():
     """
         create company profile when user is logged in.
     """
-    username = mongo.db.users.find_one(
-        {'username': session['user']})['username']
+    user = mongo.db.users.find_one(
+        {'username': session['user']})
     if request.method == 'POST':
-        profile = {
+        company_profile = {
+            'company_info': {
+                "company_name": user.get('company_name'),
+                "company_address": user.get('company_address'),
+                "company_website": user.get('company_website'),
+                "company_industry": user.get('company_industry'),
+                "company_size": user.get('company_size')
+            },
             'approach_entrance': {
                 'parking': request.form.get('parking'),
                 'entrances': request.form.get('entrances')
@@ -122,12 +129,13 @@ def create_profile():
                     'url': request.form.get('companyImg5'),
                     'desc': request.form.get('companyImg5Desc')
                 },
-            }
+            },
+            'created_by': session['user']
         }
-        mongo.db.companies.insert_one(profile)
+        mongo.db.companies.insert_one(company_profile)
         flash('Profule successfully created')
-        return redirect(url_for('company_profile', username=session['user']))
-    return render_template("create-profile.html", username=username)
+        return redirect(url_for('profile', username=session['user']))
+    return render_template("create-profile.html", user=user)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -143,9 +151,9 @@ def login():
                     existing_user['password'], request.form.get('password')):
                 session['user'] = request.form.get("username").lower()
                 flash("Welcome, {}".format(
-                        request.form.get("username")))
+                    request.form.get("username")))
                 return redirect(
-                        url_for("profile", username=session["user"]))
+                    url_for("profile", username=session["user"]))
             else:
                 # if password doesn't match
                 flash("Incorrect Username and/or Password, Please try again")
