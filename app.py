@@ -183,10 +183,10 @@ def profile(username):
     return redirect(url_for("login"))
 
 
-@app.route('/companies/<company_name>')
-def company_profile(company_name):
-    company = mongo.db.users.find_one(
-        {'companyName': company_name}
+@app.route('/companies/<company_id>')
+def company_profile(company_id):
+    company = mongo.db.companies.find_one(
+        {'_id': ObjectId(company_id)}
     )
     return render_template('company-profile.html', company=company)
 
@@ -194,4 +194,4 @@ def company_profile(company_name):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

@@ -81,3 +81,13 @@ form #profileCreationForm {
 .step.finish {
   background-color: #04AA6D;
 }
+
+/*  company listing page  */
+.company-list > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.company-list > a > .row:hover {
+  border: 2px solid var(--bs-primary);
+}

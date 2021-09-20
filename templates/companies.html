@@ -15,20 +15,26 @@
 {% for company in companies %}
 <section class="company-list mt-3">
     <hr>
-    <div class="row mx-2 px-md-3 d-flex align-items-center">
-        <div class="col-3">
-            <img src="{{ company.media.companyLogo }}" class="img-thumbnail rounded" width="200" height="200" alt="{{ company.companyName }} logo">
+    <a href="{{ url_for('company_profile', company_id=company._id) }}">
+        <div class="row mx-2 px-md-3 d-flex align-items-center">
+            <div class="col-3">
+                <img src="{{ company.media.companyLogo }}" class="img-thumbnail rounded" width="200" height="200"
+                    alt="{{ company.companyName }} logo">
+                <!-- </a> -->
+            </div>
+            <div class="col-9">
+                <!-- <a href="{{ url_for('company_profile', company_id=company._id) }}"> -->
+                <p class="company-name">{{ company.company_info.company_name }}</p>
+                <p class="company-address">Address: {{ company.company_info.company_address }}</p>
+                <p class="company-size">Size: {{ company.company_info.company_size }}</p>
+                <p class="industry">Industry: {{ company.company_info.company_industry }}</p>
+            </div>
+
         </div>
-        <div class="col-9">
-            <p class="company-name">{{ company.company_info.company_name }}</p>
-            <p class="company-address">Address: {{ company.company_info.company_address }}</p>
-            <p class="company-size">Size: {{ company.company_info.company_size }}</p>
-            <p class="industry">Industry: {{ company.company_info.company_industry }}</p>
-        </div>
-    </div>
+    </a>
     <hr>
-    
-{% endfor %}
+
+    {% endfor %}
 </section>
 
 {% endblock %}

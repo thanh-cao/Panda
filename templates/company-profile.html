@@ -2,11 +2,19 @@
 {% block content %}
 <section class="my-5 w-75 mx-auto">
     <div class="container">
+        <div class="row mx-2 px-md-3 d-flex align-items-center">
 
-        <p>Broken Dreams Boulevard 11</p>
-        <p>Company size:</p>
-        <p>Industry</p>
-
+            <div class="col-3">
+                <img src="{{ company.media.companyLogo }}" class="img-thumbnail rounded" width="200" height="200"
+                    alt="{{ company.companyName }} logo">
+            </div>
+            <div class="col-9">
+                <p class="company-name">{{ company.company_info.company_name }}</p>
+                <p class="company-address">Address: {{ company.company_info.company_address }}</p>
+                <p class="company-size">Size: {{ company.company_info.company_size }}</p>
+                <p class="industry">Industry: {{ company.company_info.company_industry }}</p>
+            </div>
+        </div>
     </div>
 
     <hr>
@@ -132,35 +140,35 @@
         </div>
     </div>
 
-    <div class=“profile-wrapper card bg-light mb-4”>
-        <div class=“card-header profile-header”>
+    <div class="profile-wrapper card bg-light mb-4">
+        <div class="card-header profile-header">
             Media
         </div>
-        <div class=“card-body”>
-            <div class=“row”>
-                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
-                    <img src=“{{ company.media.company_banner_img.url }}”
-                        alt=“{{ company.media.company_banner_img.desc }}” class=“w-100 img rounded”>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <img src="{{ company.media.company_banner_img.url }}"
+                        alt="{{ company.media.company_banner_img.desc }}" class="w-100 img rounded">
                 </div>
-                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
-                    <img src=“{{ company.media.image1.url }}” alt=“{{ company.media.image1.desc }}” class=“w-100 img
-                        rounded”>
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <img src="{{ company.media.image1.url }}" alt="{{ company.media.image1.desc }}" class="w-100 img
+                        rounded">
                 </div>
-                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
-                    <img src=“{{ company.media.image2.url }}” alt=“{{ company.media.image2.desc }}” class=“w-100 img
-                        rounded”>
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <img src="{{ company.media.image2.url }}" alt="{{ company.media.image2.desc }}" class="w-100 img
+                        rounded">
                 </div>
-                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
-                    <img src=“{{ company.media.image3.url }}” alt=“{{ company.media.image3.desc }}” class=“w-100 img
-                        rounded”>
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <img src="{{ company.media.image3.url }}" alt="{{ company.media.image3.desc }}" class="w-100 img
+                        rounded">
                 </div>
-                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
-                    <img src=“{{ company.media.image4.url }}” alt=“{{ company.media.image4.desc }}” class=“w-100 img
-                        rounded”>
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <img src="{{ company.media.image4.url }}" alt="{{ company.media.image4.desc }}" class="w-100 img
+                        rounded">
                 </div>
-                <div class=“col-12 col-md-6 col-lg-4 mb-2”>
-                    <img src=“{{ company.media.image5.url }}” alt=“{{ company.media.image5.desc }}” class=“w-100 img
-                        rounded”>
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <img src="{{ company.media.image5.url }}" alt="{{ company.media.image5.desc }}" class="w-100 img
+                        rounded">
                 </div>
             </div>
         </div>
